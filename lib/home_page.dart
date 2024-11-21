@@ -29,11 +29,17 @@ class _BookListPageState extends State<BookListPage> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Daftar Buku'),
+      appBar: AppBar(                                             
+        title: const Text('Daftar Buku',
+          style: TextStyle(
+            color: Colors.black
+          ),
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.pink[300],
         actions: [
           IconButton(
-            icon: const Icon(Icons.refresh),
+            icon: const Icon(Icons.refresh, color: Colors.black),
             onPressed: fetchBooks,
           ),
         ],
@@ -44,38 +50,58 @@ class _BookListPageState extends State<BookListPage> {
           itemCount:Buku.length,
           itemBuilder: (context, index) {
             final book = Buku[index];
-            return ListTile( 
-              title: Text(book['judul'] ?? 'No Judul', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-              subtitle: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(book['penulis'] ?? 'No Penulis', style: TextStyle(fontStyle: FontStyle.italic, fontSize: 14)),
-                  Text(book['deskripsi'] ?? 'No Deskripsi', style: TextStyle(fontSize: 12)),
-                ],
+            //menampilkan card setiap data
+            return Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 10.0,
+                vertical: 5.0,
               ),
-              trailing: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  //Tombol edit
-                  IconButton(
-                    icon: const Icon(Icons.edit, color: Colors.blue),
-                    onPressed: () {
-                      Navigator.pop(
-                        context, 
-                      );
-                    }
+              child: Card(
+                elevation: 4.0,
+                color: Colors.pink[50],
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: ListTile( 
+                  leading: Icon(
+                    Icons.book,
+                    color: Colors.pink[300],
+                    size: 40,
+                    ),
+                title: Text(book['judul'] ?? 'No Judul', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+                  subtitle: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(book['penulis'] ?? 'No Penulis', style: TextStyle(fontStyle: FontStyle.italic, fontSize: 10)),
+                        Text(book['deskripsi'] ?? 'No Deskripsi', style: TextStyle(fontSize: 12)),
+                      ],
                   ),
-                  IconButton(
-                    icon: const Icon(Icons.delete, color: Colors.red),
-                    onPressed: () {
-                      Navigator.pop(
-                        context,
-                      );
-                    },
-                  )
-                ],
-              ),
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      //Tombol edit
+                      IconButton(
+                      icon: const Icon(Icons.edit, color: Colors.blue),
+                        onPressed: () {
+                          Navigator.pop(
+                            context, 
+                          );
+                        }
+                      ),
+                      IconButton(
+                      icon: const Icon(Icons.delete, color: Colors.red),
+                        onPressed: () {
+                          Navigator.pop(
+                            context,
+                          );
+                        },
+                      )
+                    ],
+                  ),
+                ),
+              ) ,
             );
+            //tutup card
           }
         )
     );

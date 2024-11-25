@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:perpustakaan/home_page.dart';
 import 'insert.dart';
 
 class AddBookPage extends StatefulWidget {
@@ -11,6 +12,7 @@ class AddBookPage extends StatefulWidget {
 }
 
 class _AddBookPageState extends State<AddBookPage> {
+  final _formKey = GlobalKey<FormState>();
   final TextEditingController titleController = TextEditingController();
   final TextEditingController authorController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
@@ -25,9 +27,11 @@ class _AddBookPageState extends State<AddBookPage> {
         leading: IconButton(
           icon: const Icon(Icons.chevron_left), // Ganti ikon panah menjadi '<'
           onPressed: () {
-            Navigator.pop(context); // Fungsi untuk kembali ke halaman sebelumnya
+            Navigator.pop(
+                context, true); // Fungsi untuk kembali ke halaman sebelumnya
           },
         ),
+        
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -53,11 +57,14 @@ class _AddBookPageState extends State<AddBookPage> {
                   final author = authorController.text;
                   final description = descriptionController.text;
 
-                  if (title.isNotEmpty && author.isNotEmpty && description.isNotEmpty) {
+                  if (title.isNotEmpty &&
+                      author.isNotEmpty &&
+                      description.isNotEmpty) {
                     widget.onAddBook(title, author, description);
                     Navigator.pop(context); // Kembali ke halaman sebelumnya
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Buku berhasil ditambahkan')),
+                      const SnackBar(
+                          content: Text('Buku berhasil ditambahkan')),
                     );
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
@@ -67,8 +74,8 @@ class _AddBookPageState extends State<AddBookPage> {
                 },
                 child: const Text('Simpan Buku'),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.pink[300],  
-                  foregroundColor: Colors.black,        
+                  backgroundColor: Colors.pink[300],
+                  foregroundColor: Colors.black,
                 ),
               ),
             ],

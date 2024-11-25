@@ -136,23 +136,23 @@ class _BookListPageState extends State<BookListPage> {
                 );
                 //tutup card
               }),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // Navigasi ke halaman untuk menambah buku baru
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => AddBookPage(
-                onAddBook: (title, author, description) {
-                  addBook(title, author, description);
-                  Navigator.pop(context);
+              floatingActionButton: FloatingActionButton(
+                onPressed: () {
+                // Navigasi ke halaman untuk menambah buku baru
+                  Navigator.push(
+                  context,
+                    MaterialPageRoute(
+                      builder: (context) => AddBookPage(
+                        onAddBook: (title, author, description) {
+                          addBook(title, author, description);
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ),
+                  );
                 },
-              ),
-            ),
-          );
-        },
-        backgroundColor: Colors.pink[300],
-        child: const Icon(Icons.add),
+                backgroundColor: Colors.pink[300],
+                child: const Icon(Icons.add),
       ),
     );
   }
